@@ -97,14 +97,14 @@ async function injectContractBaseInfo() {
     // window.app.udid.methods.balance
     
 
-    let p1 = window.app.fu.methods.LastTime().call({from:window.app.current_account})
+    // let p1 = window.app.fu.methods.LastTime().call({from:window.app.current_account})
     let p2 = window.app.udid.methods.balanceOf(window.app.current_account).call()
 
-    let values = await Promise.all([p1,p2])
-    window.app.lastAccTime = values[0]
-    window.app.udidBalance = values[1]
+    let values = await Promise.all([p2])
+    // window.app.lastAccTime = values[0]
+    window.app.udidBalance = values[0]
 
-    console.log("---->",window.app.lastAccTime)
+    // console.log("---->",window.app.lastAccTime)
 
     $("#user_address").html(window.app.current_account + "✅")
     console.log("balance",window.app.udidBalance)
@@ -113,31 +113,31 @@ async function injectContractBaseInfo() {
     var bf = b/1000.0
 
     $("#udid_balance").html(""+String(bf))
-    console.log("lasttime",window.app.lastAccTime)
-    if (parseInt(window.app.lastAccTime) > 0){
+    // console.log("lasttime",window.app.lastAccTime)
+    // if (parseInt(window.app.lastAccTime) > 0){
 
-        Date.prototype.Format = function (fmt) { 
-            var o = {
-                "M+": this.getMonth() + 1, //月份 
-                "d+": this.getDate(), //日 
-                "h+": this.getHours(), //小时 
-                "m+": this.getMinutes(), //分 
-                "s+": this.getSeconds(), //秒 
-                "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-                "S": this.getMilliseconds() //毫秒 
-            };
-            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-            for (var k in o)
-            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-            return fmt;
-        }
+    //     Date.prototype.Format = function (fmt) { 
+    //         var o = {
+    //             "M+": this.getMonth() + 1, //月份 
+    //             "d+": this.getDate(), //日 
+    //             "h+": this.getHours(), //小时 
+    //             "m+": this.getMinutes(), //分 
+    //             "s+": this.getSeconds(), //秒 
+    //             "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+    //             "S": this.getMilliseconds() //毫秒 
+    //         };
+    //         if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    //         for (var k in o)
+    //         if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    //         return fmt;
+    //     }
 
-        var ld = new Date(parseInt(window.app.lastAccTime)*1000)
-        $("#last_Time").html(ld.Format("yyyy-MM-dd hh:mm"));
-        console.log(ld.toLocaleString())
-    }else{
-        $("#last_Time").html("you haven't get free udid");
-    }
+    //     var ld = new Date(parseInt(window.app.lastAccTime)*1000)
+    //     $("#last_Time").html(ld.Format("yyyy-MM-dd hh:mm"));
+    //     console.log(ld.toLocaleString())
+    // }else{
+    //     $("#last_Time").html("you haven't get free udid");
+    // }
 
 }
 
@@ -148,15 +148,15 @@ async function syncBalance() {
     {
         // let currentTime = Math.floor(Date.now() / 1000)
         let account = window.app.current_account
-        let p1 = window.app.fu.methods.LastTime().call({from:window.app.current_account})
+        // let p1 = window.app.fu.methods.LastTime().call({from:window.app.current_account})
         let p2 = window.app.udid.methods.balanceOf(account).call()
         // let p2 = window.app.usdt.methods.balanceOf(account).call()
         // let p3 = window.app.exchange.methods.balanceDetail(account).call()
         // let p4 = window.app.exchange.methods.accountInfo(account, currentTime).call()
         // let p5 = window.app.usdt.methods.allowance(window.app.current_account, exchange_address).call()
-        let values = await Promise.all([p1,p2])
-        window.app.lastAccTime = values[0]
-        window.app.udidBalance = values[1]
+        let values = await Promise.all([p2])
+        // window.app.lastAccTime = values[0]
+        window.app.udidBalance = values[0]
        
         // window.app.usdtBalance = values[1]
         // window.app.balanceDetail = values[2]
@@ -177,30 +177,30 @@ async function syncBalance() {
     
         console.log("balance",window.app.udidBalance)
         $("#udid_balance").html(String(bf))
-        console.log("lasttime",window.app.lastAccTime)
+        // console.log("lasttime",window.app.lastAccTime)
 
-        if (parseInt(window.app.lastAccTime) > 0){
-            Date.prototype.Format = function (fmt) { 
-                var o = {
-                    "M+": this.getMonth() + 1, //月份 
-                    "d+": this.getDate(), //日 
-                    "h+": this.getHours(), //小时 
-                    "m+": this.getMinutes(), //分 
-                    "s+": this.getSeconds(), //秒 
-                    "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-                    "S": this.getMilliseconds() //毫秒 
-                };
-                if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-                for (var k in o)
-                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-                return fmt;
-            }
-            var ld = new Date(parseInt(window.app.lastAccTime)*1000)
-            $("#last_Time").html(ld.Format("yyyy-MM-dd hh:mm"));
-            console.log(""+ld.Format("yyyy-MM-dd hh:mm"))
-        }else{
-            $("#last_Time").html("you haven't get free udid");
-        }
+        // if (parseInt(window.app.lastAccTime) > 0){
+        //     Date.prototype.Format = function (fmt) { 
+        //         var o = {
+        //             "M+": this.getMonth() + 1, //月份 
+        //             "d+": this.getDate(), //日 
+        //             "h+": this.getHours(), //小时 
+        //             "m+": this.getMinutes(), //分 
+        //             "s+": this.getSeconds(), //秒 
+        //             "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+        //             "S": this.getMilliseconds() //毫秒 
+        //         };
+        //         if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        //         for (var k in o)
+        //         if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        //         return fmt;
+        //     }
+        //     var ld = new Date(parseInt(window.app.lastAccTime)*1000)
+        //     $("#last_Time").html(ld.Format("yyyy-MM-dd hh:mm"));
+        //     console.log(""+ld.Format("yyyy-MM-dd hh:mm"))
+        // }else{
+        //     $("#last_Time").html("you haven't get free udid");
+        // }
        
     
     }
@@ -226,7 +226,7 @@ function attachEvents() {
 
     $("#exchange").click(async () => {
         try {
-            await window.app.fu.methods.TransferUDID().send({from: window.app.current_account})
+            await window.app.fu.methods.GetFreeFUSDT().send({from: window.app.current_account})
                     showMsg("成功", "success")
                     await syncBalance()
         } catch (error) {
