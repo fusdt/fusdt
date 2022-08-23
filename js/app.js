@@ -113,7 +113,7 @@ async function injectContractBaseInfo() {
     var bf = b/1000.0
 
     $("#udid_balance").html(""+String(bf))
-    $("#tokenAddr").html(""+String(UDID_Addr))
+    $("#tokenAddr").html(String(UDID_Addr))
 
     // console.log("lasttime",window.app.lastAccTime)
     // if (parseInt(window.app.lastAccTime) > 0){
@@ -179,7 +179,7 @@ async function syncBalance() {
     
         console.log("balance",window.app.udidBalance)
         $("#udid_balance").html(String(bf))
-        $("#tokenAddr").html(""+String(UDID_Addr))
+        $("#tokenAddr").html(String(UDID_Addr))
         // console.log("lasttime",window.app.lastAccTime)
 
         // if (parseInt(window.app.lastAccTime) > 0){
